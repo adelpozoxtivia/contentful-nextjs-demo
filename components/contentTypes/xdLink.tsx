@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ButtonAnimated from "../ButtonAnimated";
+import cn from 'classnames';
 
 const defaultClassnames:string = 'inline-flex py-2 mr-2 text-lg cursor-pointer underline text-primary-normal'
 
@@ -17,18 +18,23 @@ const XDLink = ({entry, className=defaultClassnames}: IXDLinkProps) => {
                 entry.isExternal ? 
                     <a target={entry.target} className={`${entry.displayStyle} === 'Button' : ${buttonClasses}: ${linkClasses}`}>{entry.label}</a>
                 :
-                <Link href={entry.href} passHref>
-                    {
-                        entry.displayStyle === 'Button' ? 
-                            <>
-                                <ButtonAnimated entry={entry} />
-                            </>
-                        :  
-                        <a target={entry.target} className={className}>
+                <>
+                    {entry.displayStyle === 'Button' ? 
+                        <>
+                            <ButtonAnimated entry={entry} />
+                        </>
+                    :  
+                        <Link href={entry.href} passHref>
+                            <a target={entry.target} className={cn(className, {
+                                'link-primary': entry.theme === 'primary',
+                                'link-secondary': entry.theme === 'secondary',
+                                'link-tertiary': entry.theme === 'tertiary'
+                            })}>
                                 {entry.label}
-                        </a>
+                            </a>
+                        </Link>
                     }
-                </Link>
+                </>
             }
         </>
     )

@@ -8,31 +8,12 @@ const rotateY = plugin(function ({ addUtilities }) {
 	})
 });
 
-const typography = plugin(function ({ addUtilities, theme }) {
-	addUtilities({
-		'.section-title': {
-			'font-family': theme('fontFamily.dosis'),
-			color: theme('colors.primary-dark'),
-			'font-size': '38px',
-			'line-height': 1.4,
-			'font-weight': 800,
-		},
-		'.section-subtitle': {
-			'font-size': '16px',
-			'font-weight': 700,
-			'letter-spacing': '0.5px',
-			'line-height': 1.4,
-			'text-transform': 'uppercase',
-		}
-	})
-});
-
-
 module.exports = {
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
 		'./components/**/*.{js,ts,jsx,tsx}',
 	],
+	plugins: [rotateY],
 	theme: {
 		container: {
 			padding: {
@@ -45,6 +26,19 @@ module.exports = {
 			},
 		},
 		extend: {
+			animation: {
+				'bounce-low': 'bounce 3s linear infinite',
+				'fixed-header-fade-in': 'fixed-header-fade-in 500ms ease-in-out'
+			},
+			boxShadow: {
+				small: '0 5px 10px rgba(0, 0, 0, 0.12)',
+				medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
+				'img-w-txt': '-1px 3px 20px 0px rgba(82, 90, 101, 0.10)',
+				'fixed-header': '0 2px 28px 0 rgba(0, 0, 0, .06)',
+				'mobile-header': '0 5px 40px 0 rgba(0, 0, 0, 0.11)',
+				'mobile-nav-menu': '0 7px 13px 0 rgba(0, 0, 0, 0.10)',
+				'fixed-header-dropdown': '0px 0px 15px 0px rgba(0, 0, 0, 0.10)'
+			},
 			colors: {
 				'primary-normal': '#7b68ee',
 				'primary-hover': '#3e57d0',
@@ -63,15 +57,6 @@ module.exports = {
 				orange: '#ff561d',
 				'orange-light': '#FF9800',
 			},
-			spacing: {
-				28: '7rem',
-			},
-			letterSpacing: {
-				tighter: '-.04em',
-			},
-			lineHeight: {
-				tight: 1.2,
-			},
 			fontFamily: {
 				'sans': ['Catamaran', 'sans-serif'],
 				'dosis': ['Dosis', 'sans-serif']
@@ -84,22 +69,39 @@ module.exports = {
 				'7xl': '4.5rem',
 				'8xl': '6.25rem',
 			},
-			boxShadow: {
-				small: '0 5px 10px rgba(0, 0, 0, 0.12)',
-				medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
-				'img-w-txt': '-1px 3px 20px 0px rgba(82, 90, 101, 0.10)'
+			keyframes: {
+				'fixed-header-fade-in': {
+					'0%': {
+						opacity: 0,
+						transform: 'translate3d(0,-100%,0)'
+					},
+					'100%': {
+						opacity: 1,
+						transform: 'translateZ(0)'
+					}
+				}
 			},
-			animation: {
-				'bounce-low': 'bounce 3s linear infinite',
+			letterSpacing: {
+				tighter: '-.04em',
+			},
+			lineHeight: {
+				tight: 1.2,
+			},
+			spacing: {
+				28: '7rem',
+			},
+			strokeWidth: {
+				'1': '0.9px',
 			},
 			transitionProperty: {
 				'height': 'height',
 				'width': 'width'
 			},
-			strokeWidth: {
-				'1': '0.9px',
-			},
 		},
 	},
-	plugins: [rotateY, typography],
+	variants: {
+		extend: {
+			display: ["group-hover"],
+		},
+	}
 }
