@@ -13,7 +13,7 @@ export default function xdSetOfFeatures({entry}){
         case "Display Style 3":
             return ( <FeatureC entry={entry} /> );
         default :
-           // console.log("Display style not found: " + displayStyle);
+            //console.log("Display style not found: " + displayStyle);
             //console.log("Loading default display style");
             return ( <FeatureA entry={entry} /> );
     }
