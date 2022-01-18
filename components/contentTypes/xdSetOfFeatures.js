@@ -3,7 +3,7 @@ import FeatureB from './features/featureB';
 import FeatureC from './features/featureC';
 
 export default function xdSetOfFeatures({entry}){
-    console.log(entry);
+    //console.log(entry);
     const displayStyle = entry.displayStyle;
     switch (displayStyle) {
         case "Display Style 1":
